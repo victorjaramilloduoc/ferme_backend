@@ -18,12 +18,15 @@ import lombok.Data;
 public class UserEntity implements Serializable {
 
 	/**
-	 * 
+	 * Serializado de la clase
 	 */
 	private static final long serialVersionUID = -3492697663152327734L;
 	
+	//Este Tag hace referencia al id de la tabla en la base de datos.
 	@Id
+	// Este Tag hace referencia a la columna de la tabla en base de datos.
 	@Column(name="ID_USUARIO")
+	// Este tag nos ayudará en el caso que se agreguen nuevos usuarios, este tag creará automáticamente un id secuencial.
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
