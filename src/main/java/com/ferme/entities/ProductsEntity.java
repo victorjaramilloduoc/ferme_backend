@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Entity
@@ -26,10 +28,24 @@ public class ProductsEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name ="TITULO")
-	private String title;
+	@Column(name = "CODIGO_PRODUCTO")
+	@SerializedName("product_code")
+	private Long productCode;
+	
+	@Column(name ="NOMBRE")
+	private String name;
 	
 	@Column(name="DESCRIPCION")
 	private String description;
+	
+	@Column(name = "PRECIO")
+	private Long price;
+	
+	@Column(name = "STOCK")
+	private Long stock;
+	
+	@Column(name = "ID_PROVEEDOR")
+	@SerializedName("supplier_id")
+	private Long supplierId;
 
 }
