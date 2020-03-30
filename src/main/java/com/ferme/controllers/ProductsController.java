@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,12 +33,12 @@ public class ProductsController {
 	 * De esta manera se crean la rutas que tendrán los servicios.
 	 * @return
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getProducts() {
 		return ResponseEntity.ok(service.getProducts());
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> saveProducts(@RequestBody ProductsEntity product) {
 		Map<String, Object> response = new LinkedHashMap<>();
 		
@@ -48,6 +49,19 @@ public class ProductsController {
 			return ResponseEntity.ok(response);
 		}else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+	
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Object> searchProduct(@PathVariable(value = "id") Long id){
+		ProductsEntity response = service.searchProduct(id);
+		
+		if(response != null) {
+			return ResponseEntity.ok(response);
+		}else {
+			Map<String, Object> resp = new LinkedHashMap<>();
+			resp.put("message", "product not exist");
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 	}
 

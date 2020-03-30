@@ -2,6 +2,7 @@ package com.ferme.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +45,19 @@ public class ProductsService {
 			repository.save(product);
 			response = true;
 		} catch (Exception e) {
-			LOG.error("Error al guardar el producto. Cause: {}",e.getMessage());
+			LOG.error("Error al guardar el producto. Cause: {}",e.getMessage(), e);
 		}
 		return response;
+	}
+	
+	public ProductsEntity searchProduct(Long id) {
+		Optional<ProductsEntity> response = null;
+		try {
+			response = repository.findById(id);
+		} catch (Exception e) {
+			LOG.error("Error al buscar el producto. Causa: {}", e.getMessage(), e);
+		}
+		return response.isPresent() ? response.get(): null;
 	}
 
 }
