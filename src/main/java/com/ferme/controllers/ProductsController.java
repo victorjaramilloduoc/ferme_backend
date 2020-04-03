@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ferme.entities.ProductsEntity;
+import com.ferme.entities.ProductEntity;
 import com.ferme.services.ProductsService;
 
 /**
@@ -39,7 +39,7 @@ public class ProductsController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Object> saveProducts(@RequestBody ProductsEntity product) {
+	public ResponseEntity<Object> saveProducts(@RequestBody ProductEntity product) {
 		Map<String, Object> response = new LinkedHashMap<>();
 		
 		boolean productSaved = service.saveProduct(product);
@@ -54,7 +54,7 @@ public class ProductsController {
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> searchProduct(@PathVariable(value = "id") Long id){
-		ProductsEntity response = service.searchProduct(id);
+		ProductEntity response = service.searchProduct(id);
 		
 		if(response != null) {
 			return ResponseEntity.ok(response);

@@ -14,9 +14,9 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Entity
-@Table(name="PRODUCTOS")
+@Table(name="PRODUCTO")
 @Data
-public class ProductsEntity implements Serializable {
+public class ProductEntity implements Serializable {
 
 	/**
 	 * Serializado de la clase

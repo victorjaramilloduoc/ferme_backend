@@ -2,8 +2,8 @@ package com.ferme.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.ferme.entities.ProductsEntity;
+import com.ferme.entities.ProductEntity;
 
-public interface ProductsRepository extends CrudRepository<ProductsEntity, Long> {
+public interface ProductsRepository extends CrudRepository<ProductEntity, Long> {
 
 }

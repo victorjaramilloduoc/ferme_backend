@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ferme.entities.ProductsEntity;
+import com.ferme.entities.ProductEntity;
 import com.ferme.repositories.ProductsRepository;
 
 /**
@@ -29,17 +29,17 @@ public class ProductsService {
 	 * Método que retorna una lista con todos los productos registrados en la base de datos.
 	 * @return response
 	 */
-	public List<ProductsEntity> getProducts(){
-		List<ProductsEntity> response = new ArrayList<>();
+	public List<ProductEntity> getProducts(){
+		List<ProductEntity> response = new ArrayList<>();
 		try {
-			response = (List<ProductsEntity>) repository.findAll();
+			response = (List<ProductEntity>) repository.findAll();
 		} catch (Exception e) {
 			LOG.error("Error al buscar los productos", e.getMessage(), e);
 		}
 		return response;
 	}
 	
-	public boolean saveProduct(ProductsEntity product) {
+	public boolean saveProduct(ProductEntity product) {
 		boolean response = false;
 		try {
 			repository.save(product);
@@ -50,8 +50,8 @@ public class ProductsService {
 		return response;
 	}
 	
-	public ProductsEntity searchProduct(Long id) {
-		Optional<ProductsEntity> response = null;
+	public ProductEntity searchProduct(Long id) {
+		Optional<ProductEntity> response = null;
 		try {
 			response = repository.findById(id);
 		} catch (Exception e) {
