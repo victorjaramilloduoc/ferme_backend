@@ -1,8 +1,9 @@
 package com.ferme.services;
 
 import java.util.ArrayList;
-
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -57,5 +58,20 @@ public class UserService {
 		}
 		return response.isPresent() ? response.get(): null;
 	}
-
+	
+	public Object saveUser(UserEntity user, String message) {
+		Map<String, Object> response = new LinkedHashMap<>();
+		try {
+			UserEntity us = repository.save(user);
+			response.put("status", "Ok");
+			response.put(message, us);
+		} catch (Exception e) {
+			response.put("status", "error");
+			response.put("cause", e.getMessage());
+			response.put("details", e);
+			LOG.error("error al guardar el usuario, causa: {}", e.getMessage(), e);
+		}
+		return response;
+	}
+	
 }
