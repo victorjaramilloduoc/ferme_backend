@@ -3,6 +3,7 @@ package com.ferme.services;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,16 @@ public class UserService {
 			LOG.error("Error al buscar los usuarios", e.getMessage(), e);
 		}
 		return response;
+	}
+	
+	public UserEntity searchUser(Long id) {
+		Optional<UserEntity> response = null;
+		try {
+			response = repository.findById(id);
+		} catch (Exception e) {
+			LOG.error("Error al buscar el usuario, causa: {}", e.getMessage(), e);
+		}
+		return response.isPresent() ? response.get(): null;
 	}
 
 }

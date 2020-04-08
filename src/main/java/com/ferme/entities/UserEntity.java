@@ -10,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Entity
-@Table(name="USUARIOS")
+@Table(name="USUARIO")
 @Data
 public class UserEntity implements Serializable {
 
@@ -30,11 +32,14 @@ public class UserEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "NOMBRE")
+	private String name;
+
+	@Column(name="APELLIDO")
+	private String lastName;
+	
 	@Column(name ="NOMBRE_USUARIO")
 	private String userName;
-	
-	@Column(name="APELLIDO_USUARIO")
-	private String lastName;
 
 	@Column(name="RUT_USUARIO")
 	private Long rut;
@@ -46,12 +51,16 @@ public class UserEntity implements Serializable {
 	private char genere;
 	
 	@Column(name="FECHA_NACIMIENTO_USUARIO")
+	@SerializedName("birth_date")
 	private Date birthDate;
 	
 	@Column(name="PASS_USUARIO")
 	private String password;
 	
-	@Column(name="IS_ADMIN")
-	private boolean isAdmin;
+	@Column(name="DIRECCION")
+	private String address;
+	
+	@Column(name = "ID_COMUNA")
+	private Long location;
 
 }
