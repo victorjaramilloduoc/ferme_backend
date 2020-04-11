@@ -85,6 +85,25 @@ public class UserController {
 			return reponseUtil(mapResponse, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@RequestMapping(value = "/{id}/disable",method = RequestMethod.PATCH)
+	public ResponseEntity<Object> disableUser(@PathVariable(value = "id") Long id) {
+		Map<String, Object> response = service.disableUser(id);
+		
+		if (response != null) {
+			Map<String, Object> mapResponse = new LinkedHashMap<>();
+			if(response.containsKey("user")) {
+				mapResponse.put("message", "usuario deshabilitado");
+				mapResponse.put("user", response.get("user"));
+				return reponseUtil(mapResponse, HttpStatus.OK);
+			}else {
+				mapResponse.put("error", response.get("error"));
+				return reponseUtil(mapResponse, HttpStatus.CONFLICT);
+			}
+		} else {
+			return reponseUtil(response, HttpStatus.NO_CONTENT);
+		}
+	}
 
 	private ResponseEntity<Object> reponseUtil(Object response, HttpStatus httpStatus) {
 		return ResponseEntity.status(httpStatus).body(response);

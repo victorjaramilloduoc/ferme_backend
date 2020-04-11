@@ -74,4 +74,25 @@ public class UserService {
 		return response;
 	}
 	
+	public Map<String, Object> disableUser(Long id) {
+		UserEntity us = null;
+		Map<String, Object> responseMap = new LinkedHashMap<>();
+		try {
+			us = searchUser(id);
+			if(us != null) {
+				us.setEnable(false);
+				us = repository.save(us);
+				responseMap.put("user", us);
+			}else {
+				responseMap.put("error", "el usuario no existe");
+			}
+		} catch (Exception e) {
+			LOG.error("Error al desabilidar el usuario, causa: {}", e.getMessage(), e);
+			responseMap.put("error", "Error al desabilidar el usuario");
+			responseMap.put("cause", e.getMessage());
+			responseMap.put("details", e);
+		}
+		return responseMap;
+	}
+	
 }
