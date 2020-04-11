@@ -3,11 +3,14 @@ package com.ferme.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.gson.annotations.SerializedName;
@@ -60,7 +63,11 @@ public class UserEntity implements Serializable {
 	@Column(name="DIRECCION")
 	private String address;
 	
-	@Column(name = "ID_COMUNA")
-	private Long location;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name ="ID_COMUNA", nullable = false)
+	private LocationEntity location;
+	
+	@Column(name="HABILITADO")
+	private boolean enable;
 
 }
