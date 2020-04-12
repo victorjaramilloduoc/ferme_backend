@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@ComponentScan("com.ferme.*")
+@ComponentScan("com.ferme")
 public class FermeApplication {
 
 	public static void main(String[] args) {
