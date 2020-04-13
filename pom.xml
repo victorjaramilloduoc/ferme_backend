@@ -61,11 +61,23 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+    		<groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
 		
 		<dependency>
-			<groupId>com.portafolio</groupId>
-			<artifactId>utility</artifactId>
-			<version>0.0.3</version>
+		    <groupId>com.portafolio</groupId>
+		    <artifactId>utility</artifactId>
+		    <version>0.0.3</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
@@ -74,7 +86,6 @@
 		    <artifactId>json</artifactId>
 		    <version>20190722</version>
 		</dependency>
-				
 				
 	</dependencies>
 

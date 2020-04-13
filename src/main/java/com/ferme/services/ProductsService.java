@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ferme.entities.ProductEntity;
 import com.ferme.repositories.ProductsRepository;
+import com.portafolio.util.entities.ProductEntity;
 
 /**
  * 

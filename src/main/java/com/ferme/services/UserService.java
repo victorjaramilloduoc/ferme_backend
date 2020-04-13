@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.ferme.repositories.UserRepository;
 import com.portafolio.util.entities.UserEntity;
-import com.portafolio.util.login.LoginUtil;
 
 /**
  * 
