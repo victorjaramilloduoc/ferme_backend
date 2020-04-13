@@ -4,11 +4,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -105,8 +107,14 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public Map<String, String> login(@RequestHeader HttpHeaders httpHeaders) {
+		return null;
+	}
+	
 	private ResponseEntity<Object> reponseUtil(Object response, HttpStatus httpStatus) {
 		return ResponseEntity.status(httpStatus).body(response);
 	}
+	
 
 }
