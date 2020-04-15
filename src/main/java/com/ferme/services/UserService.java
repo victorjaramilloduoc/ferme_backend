@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.ferme.repositories.UserRepository;
 import com.portafolio.util.entities.UserEntity;
+import com.portafolio.util.login.LoginUtil;
 
 /**
  * 
@@ -96,7 +97,7 @@ public class UserService {
 	}
 	
 	public UserEntity fermeLogin() {
-//		LoginUtil.getCredentialsOfHeade
+//		LoginUtil.fermeLogin(httpHeaders, loginUrl)
 		return null;
 	}
 	
