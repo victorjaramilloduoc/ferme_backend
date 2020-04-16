@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import com.ferme.repositories.UserRepository;
@@ -96,9 +97,18 @@ public class UserService {
 		return responseMap;
 	}
 	
-	public UserEntity fermeLogin() {
-//		LoginUtil.fermeLogin(httpHeaders, loginUrl)
-		return null;
+	public Object fermeLogin(HttpHeaders httpHeaders) {
+		Map<String, String> credentialsMap = LoginUtil.getCredentialsOfHeader(httpHeaders);
+		Map<String, Object> response = new LinkedHashMap<>();
+		UserEntity user = repository.getUserByEmailAndPassword(credentialsMap.get("username"),
+				credentialsMap.get("password"));
+		if(user != null) {
+			response.put("status", "Ok");
+			response.put("welcome", user);
+			return response;
+		}else {
+			return null;
+		}
 	}
 	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferme.services.UserService;
 import com.portafolio.util.entities.UserEntity;
+import com.portafolio.util.login.LoginUtil;
 
 /**
  * 
@@ -108,10 +109,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public Map<String, String> login(@RequestHeader HttpHeaders httpHeaders) {
-		System.out.println("djlhfkjdshfkldkjfshdfkhfkjshdfjkdshkfjhsk");
-		System.out.println("shdjkfdhfkjshdkjfhdskjfhdjkshfkjhsd");
-		return null;
+	public ResponseEntity<Object> login(@RequestHeader HttpHeaders httpHeaders) {
+		Object login = service.fermeLogin(httpHeaders);
+		if(login != null) {
+			return reponseUtil(login, HttpStatus.OK);
+		}else {
+			return reponseUtil(login, HttpStatus.CONFLICT);
+		}
 	}
 	
 	private ResponseEntity<Object> reponseUtil(Object response, HttpStatus httpStatus) {
