@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferme.services.UserService;
 import com.portafolio.util.entities.UserEntity;
-import com.portafolio.util.login.LoginUtil;
 
 /**
  * 
