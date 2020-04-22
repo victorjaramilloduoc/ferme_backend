@@ -103,8 +103,13 @@ public class UserService {
 		UserEntity user = repository.getUserByEmailAndPassword(credentialsMap.get("username"),
 				credentialsMap.get("password"));
 		if(user != null) {
+			credentialsMap.clear();
+			credentialsMap.put("id", user.getId().toString());
+			credentialsMap.put("name", user.getName());
+			credentialsMap.put("lastName", user.getLastName());
+			credentialsMap.put("email", user.getEmail());
 			response.put("status", "Ok");
-			response.put("welcome", user);
+			response.put("welcome", credentialsMap);
 			return response;
 		}else {
 			return null;
