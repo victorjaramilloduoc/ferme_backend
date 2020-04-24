@@ -88,7 +88,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value = "/{id}/disable",method = RequestMethod.PATCH)
+	@RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
 	public ResponseEntity<Object> disableUser(@PathVariable(value = "id") Long id) {
 		Map<String, Object> response = service.disableUser(id);
 		
@@ -107,13 +107,16 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ResponseEntity<Object> login(@RequestHeader HttpHeaders httpHeaders) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<Object> login(@RequestHeader(required = true) HttpHeaders httpHeaders) {
 		Object login = service.fermeLogin(httpHeaders);
 		if(login != null) {
 			return reponseUtil(login, HttpStatus.OK);
 		}else {
-			return reponseUtil(login, HttpStatus.CONFLICT);
+			Map<String, Object>response = new LinkedHashMap<>();
+			response.put("status", "error");
+			response.put("message", "user or password not exist");
+			return reponseUtil(response, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
