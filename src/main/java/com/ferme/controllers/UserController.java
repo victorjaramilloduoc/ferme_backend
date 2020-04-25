@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferme.services.UserService;
 import com.portafolio.util.entities.UserEntity;
+import com.portafolio.util.rest.client.ResponseUtil;
 
 /**
  * 
@@ -46,7 +47,7 @@ public class UserController {
 		if(response != null) {
 			return ResponseEntity.ok(response);
 		}else {
-			return reponseUtil(response, HttpStatus.NO_CONTENT);
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
 	}
 	
@@ -56,7 +57,7 @@ public class UserController {
 		if(response != null) {
 			return ResponseEntity.ok(response);
 		}else {
-			return reponseUtil(response, HttpStatus.NO_CONTENT);
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
 	}
 	
@@ -67,7 +68,7 @@ public class UserController {
 		if(response != null) {
 			return ResponseEntity.ok(response);
 		}else {
-			return reponseUtil(response, HttpStatus.NO_CONTENT);
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
 	}
 	
@@ -79,12 +80,12 @@ public class UserController {
 			if(response != null) {
 				return ResponseEntity.ok(response);
 			}else {
-				return reponseUtil(response, HttpStatus.NO_CONTENT);
+				return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 			}
 		}else {
 			Map<String, Object> mapResponse = new LinkedHashMap<>();
 			mapResponse.put("error", "usuario no existe");
-			return reponseUtil(mapResponse, HttpStatus.CONFLICT);
+			return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
 		}
 	}
 	
@@ -97,13 +98,13 @@ public class UserController {
 			if(response.containsKey("user")) {
 				mapResponse.put("message", "usuario deshabilitado");
 				mapResponse.put("user", response.get("user"));
-				return reponseUtil(mapResponse, HttpStatus.OK);
+				return ResponseUtil.reponseUtil(mapResponse, HttpStatus.OK);
 			}else {
 				mapResponse.put("error", response.get("error"));
-				return reponseUtil(mapResponse, HttpStatus.CONFLICT);
+				return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
 			}
 		} else {
-			return reponseUtil(response, HttpStatus.NO_CONTENT);
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
 	}
 
@@ -111,18 +112,13 @@ public class UserController {
 	public ResponseEntity<Object> login(@RequestHeader(required = true) HttpHeaders httpHeaders) {
 		Object login = service.fermeLogin(httpHeaders);
 		if(login != null) {
-			return reponseUtil(login, HttpStatus.OK);
+			return ResponseUtil.reponseUtil(login, HttpStatus.OK);
 		}else {
 			Map<String, Object>response = new LinkedHashMap<>();
 			response.put("status", "error");
 			response.put("message", "user or password not exist");
-			return reponseUtil(response, HttpStatus.BAD_REQUEST);
+			return ResponseUtil.reponseUtil(response, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	private ResponseEntity<Object> reponseUtil(Object response, HttpStatus httpStatus) {
-		return ResponseEntity.status(httpStatus).body(response);
-	}
-	
 
 }

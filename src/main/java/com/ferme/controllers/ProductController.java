@@ -24,7 +24,7 @@ import com.portafolio.util.entities.ProductEntity;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value="/api/v1/products")
-public class ProductsController {
+public class ProductController {
 	
 	@Autowired
 	private ProductsService service;
