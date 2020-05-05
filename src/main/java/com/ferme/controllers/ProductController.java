@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferme.services.ProductsService;
 import com.portafolio.util.entities.ProductEntity;
+import com.portafolio.util.rest.client.ResponseUtil;
 
 /**
  * 
@@ -35,20 +36,19 @@ public class ProductController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getProducts() {
-		return ResponseEntity.ok(service.getProducts());
+		return ResponseUtil.reponseUtil(service.getProducts(), HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> saveProducts(@RequestBody ProductEntity product) {
-		Map<String, Object> response = new LinkedHashMap<>();
 		
-		boolean productSaved = service.saveProduct(product);
+		Object productSaved = service.saveProduct(product, "save_product");
 		
-		if(productSaved) {
-			response.put("products", productSaved);
-			return ResponseEntity.ok(response);
+		if( !((Map<String, Object>)productSaved).get("status").equals("error") ) {
+			return ResponseUtil.reponseUtil(productSaved, HttpStatus.OK);
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+			return ResponseUtil.reponseUtil(productSaved, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -57,11 +57,31 @@ public class ProductController {
 		ProductEntity response = service.searchProduct(id);
 		
 		if(response != null) {
-			return ResponseEntity.ok(response);
+			return ResponseUtil.reponseUtil(response, HttpStatus.OK);
 		}else {
 			Map<String, Object> resp = new LinkedHashMap<>();
 			resp.put("message", "product not exist");
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+			return ResponseUtil.reponseUtil(response,HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateProducts(@RequestBody ProductEntity product) {
+		
+		if(service.searchProduct(product.getId() != null ? product.getId() : 0l) != null) {
+			
+			Object productSaved = service.saveProduct(product, "product_updated");
+			
+			if( !((Map<String, Object>)productSaved).get("status").equals("error") ) {
+				return ResponseUtil.reponseUtil(productSaved, HttpStatus.OK);
+			}else {
+				return ResponseUtil.reponseUtil(productSaved, HttpStatus.BAD_REQUEST);
+			}
+		}else {
+			Map<String, Object> mapResponse = new LinkedHashMap<>();
+			mapResponse.put("error", "producto no existe");
+			return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
 		}
 	}
 

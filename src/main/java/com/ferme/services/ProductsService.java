@@ -1,7 +1,9 @@
 package com.ferme.services;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -39,13 +41,17 @@ public class ProductsService {
 		return response;
 	}
 	
-	public boolean saveProduct(ProductEntity product) {
-		boolean response = false;
+	public Object saveProduct(ProductEntity product, String message) {
+		Map<String, Object> response = new LinkedHashMap<>();
 		try {
-			repository.save(product);
-			response = true;
+			ProductEntity prod = repository.save(product);
+			response.put("status", "OK");
+			response.put(message, prod);
 		} catch (Exception e) {
-			LOG.error("Error al guardar el producto. Cause: {}",e.getMessage(), e);
+			response.put("status", "error");
+			response.put("cause", e.getMessage());
+			response.put("details", e);
+			LOG.error("Error al " + message + " el producto. Cause: {}", e.getMessage(), e);
 		}
 		return response;
 	}
