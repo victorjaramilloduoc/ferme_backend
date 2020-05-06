@@ -66,7 +66,7 @@ public class ProductsService {
 		return response.isPresent() ? response.get(): null;
 	}
 	
-	public Map<String, Object> disableUser(Long id) {
+	public Map<String, Object> disableProduct(Long id) {
 		ProductEntity prod = null;
 		Map<String, Object> responseMap = new LinkedHashMap<>();
 		try {

@@ -87,7 +87,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
 	public ResponseEntity<Object> disableProduct(@PathVariable(value = "id") Long id) {
-		Map<String, Object> response = service.disableUser(id);
+		Map<String, Object> response = service.disableProduct(id);
 		
 		if (response != null) {
 			Map<String, Object> mapResponse = new LinkedHashMap<>();
