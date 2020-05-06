@@ -65,5 +65,26 @@ public class ProductsService {
 		}
 		return response.isPresent() ? response.get(): null;
 	}
+	
+	public Map<String, Object> disableUser(Long id) {
+		ProductEntity prod = null;
+		Map<String, Object> responseMap = new LinkedHashMap<>();
+		try {
+			prod = searchProduct(id);
+			if(prod != null) {
+				prod.setEnable(false);
+				prod = repository.save(prod);
+				responseMap.put("product", prod);
+			}else {
+				responseMap.put("error", "el producto no existe");
+			}
+		} catch (Exception e) {
+			LOG.error("Error al desabilidar el usuario, causa: {}", e.getMessage(), e);
+			responseMap.put("error", "Error al desabilidar el usuario");
+			responseMap.put("cause", e.getMessage());
+			responseMap.put("details", e);
+		}
+		return responseMap;
+	}
 
 }

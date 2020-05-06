@@ -84,5 +84,24 @@ public class ProductController {
 			return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
+	public ResponseEntity<Object> disableProduct(@PathVariable(value = "id") Long id) {
+		Map<String, Object> response = service.disableUser(id);
+		
+		if (response != null) {
+			Map<String, Object> mapResponse = new LinkedHashMap<>();
+			if(response.containsKey("product")) {
+				mapResponse.put("message", "producto deshabilitado");
+				mapResponse.put("product", response.get("product"));
+				return ResponseUtil.reponseUtil(mapResponse, HttpStatus.OK);
+			}else {
+				mapResponse.put("error", response.get("error"));
+				return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
+			}
+		} else {
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
+		}
+	}
 
 }
