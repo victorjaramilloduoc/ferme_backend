@@ -11,8 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ferme.repositories.ProductsRepository;
+import com.ferme.repositories.ProductFamilyRepository;
+import com.ferme.repositories.ProductRepository;
+import com.ferme.repositories.ProductSubFamilyRepository;
 import com.portafolio.util.entities.ProductEntity;
+import com.portafolio.util.entities.ProductFamilyEntity;
+import com.portafolio.util.entities.ProductSubFamilyEntity;
 
 /**
  * 
@@ -20,12 +24,18 @@ import com.portafolio.util.entities.ProductEntity;
  *
  */
 @Service
-public class ProductsService {
+public class ProductService {
 	
-	private Logger LOG = LoggerFactory.getLogger(ProductsService.class);
+	private Logger LOG = LoggerFactory.getLogger(ProductService.class);
 	
 	@Autowired
-	private ProductsRepository  repository;
+	private ProductRepository  repository;
+	
+	@Autowired
+	private ProductSubFamilyRepository subFamilyRepo;
+	
+	@Autowired
+	private ProductFamilyRepository familyRepo;
 
 	/**
 	 * Método que retorna una lista con todos los productos registrados en la base de datos.
@@ -85,6 +95,26 @@ public class ProductsService {
 			responseMap.put("details", e);
 		}
 		return responseMap;
+	}
+	
+	public List<ProductSubFamilyEntity> getProductsSubFamily(){
+		List<ProductSubFamilyEntity> response = new ArrayList<>();
+		try {
+			response = (List<ProductSubFamilyEntity>) subFamilyRepo.findAll();
+		} catch (Exception e) {
+			LOG.error("Error al buscar las subfamilias", e.getMessage(), e);
+		}
+		return response;
+	}
+	
+	public List<ProductFamilyEntity> getProductsFamily(){
+		List<ProductFamilyEntity> response = new ArrayList<>();
+		try {
+			response = (List<ProductFamilyEntity>) familyRepo.findAll();
+		} catch (Exception e) {
+			LOG.error("Error al buscar las familias", e.getMessage(), e);
+		}
+		return response;
 	}
 
 }

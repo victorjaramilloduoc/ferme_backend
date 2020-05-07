@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ferme.services.ProductsService;
+import com.ferme.services.ProductService;
 import com.portafolio.util.entities.ProductEntity;
 import com.portafolio.util.rest.client.ResponseUtil;
 
@@ -28,7 +28,7 @@ import com.portafolio.util.rest.client.ResponseUtil;
 public class ProductController {
 	
 	@Autowired
-	private ProductsService service;
+	private ProductService service;
 	
 	/**
 	 * De esta manera se crean la rutas que tendrán los servicios.
@@ -41,7 +41,7 @@ public class ProductController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Object> saveProducts(@RequestBody ProductEntity product) {
+	public ResponseEntity<Object> saveProduct(@RequestBody ProductEntity product) {
 		
 		Object productSaved = service.saveProduct(product, "save_product");
 		
@@ -67,7 +67,7 @@ public class ProductController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateProducts(@RequestBody ProductEntity product) {
+	public ResponseEntity<Object> updateProduct(@RequestBody ProductEntity product) {
 		
 		if(service.searchProduct(product.getId() != null ? product.getId() : 0l) != null) {
 			
@@ -102,6 +102,16 @@ public class ProductController {
 		} else {
 			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
+	}
+	
+	@RequestMapping(value = "/sub-family",method = RequestMethod.GET)
+	public ResponseEntity<Object> getProductsSubFamily(){
+		return ResponseUtil.reponseUtil(service.getProductsSubFamily(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/family",method = RequestMethod.GET)
+	public ResponseEntity<Object> getProductsFamily(){
+		return ResponseUtil.reponseUtil(service.getProductsFamily(), HttpStatus.OK);
 	}
 
 }

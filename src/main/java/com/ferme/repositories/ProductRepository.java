@@ -6,6 +6,6 @@ import com.portafolio.util.entities.ProductEntity;
 
 
 
-public interface ProductsRepository extends CrudRepository<ProductEntity, Long> {
+public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
 }
