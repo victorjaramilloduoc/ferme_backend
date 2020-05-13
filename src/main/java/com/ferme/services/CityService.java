@@ -17,5 +17,9 @@ public class CityService {
 	public List<CityEntity> getCities(){
 		return (List<CityEntity>) repository.findAll();
 	}
+	
+	public List<CityEntity> getCitiesByRegionId(Long regionId){
+		return (List<CityEntity>) repository.getCitiesByRegionId(regionId);
+	}
 
 }
