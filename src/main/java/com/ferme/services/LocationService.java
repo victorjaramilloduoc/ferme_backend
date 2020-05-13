@@ -17,5 +17,8 @@ public class LocationService {
 	public List<LocationEntity> getLocations(){
 		return (List<LocationEntity>) repository.findAll();
 	}
-
+	
+	public List<LocationEntity> getLocationsByCityId(Long cityId){
+		return (List<LocationEntity>) repository.getLocationsByCityId(cityId);
+	}
 }
