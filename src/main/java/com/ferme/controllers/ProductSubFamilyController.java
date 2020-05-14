@@ -17,8 +17,6 @@ import com.portafolio.util.rest.client.ResponseUtil;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value="/api/v1/subfamily")
-
-
 public class ProductSubFamilyController {
 
     @Autowired
