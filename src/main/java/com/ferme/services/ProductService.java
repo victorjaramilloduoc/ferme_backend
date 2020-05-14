@@ -58,7 +58,7 @@ public class ProductService {
 			response.put("status", "OK");
 			response.put(message, prod);
 		} catch (Exception e) {
-			response.put("status", "error");
+			response.put("status", e.getCause());
 			response.put("cause", e.getMessage());
 			response.put("details", e);
 			LOG.error("Error al " + message + " el producto. Cause: {}", e.getMessage(), e);
