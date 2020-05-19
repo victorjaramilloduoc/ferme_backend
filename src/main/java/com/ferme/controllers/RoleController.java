@@ -16,7 +16,7 @@ import com.portafolio.util.rest.client.ResponseUtil;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value="/api/v1/roles")
-public class UserRoleController {
+public class RoleController {
 	
 	@Autowired
 	private UserRoleService service;
