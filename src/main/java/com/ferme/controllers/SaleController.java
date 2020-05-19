@@ -20,7 +20,7 @@ public class SaleController {
 	private SaleService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Object> getUserRoles() {
+	public ResponseEntity<Object> getSales() {
 		Object response = service.getSales();
 		if(response != null) {
 			return ResponseUtil.reponseUtil(response, HttpStatus.OK);
