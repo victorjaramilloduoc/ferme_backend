@@ -37,7 +37,12 @@ public class ProductSaleService {
 			if(searchProduct.getStock() >= sale.getQuantity() ? true : false) {
 				
 				searchProduct.setStock(searchProduct.getStock() - sale.getQuantity());
-				Object resp = productService.saveProduct(searchProduct, "");
+				Object resp = productService.saveProduct(searchProduct, "prd");
+				
+				ProductEntity prod = (ProductEntity) ((Map<String, Object>) resp).get("prd");
+				if( prod.getStock().equals(0l) ) {
+					productService.disableProduct(prod.getId());
+				}
 				
 				if( ((Map<String, Object>)resp).get("status").toString().equals("OK") ) {
 					ProductSaleEntity saleResponse = repository.save(sale);
