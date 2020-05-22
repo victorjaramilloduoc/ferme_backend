@@ -6,6 +6,6 @@ ADD target/ferme-0.0.1.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
-ENV SHOW_SQL=true
+#ENV SHOW_SQL=true
 
 CMD ["catalina.sh", "run"]
