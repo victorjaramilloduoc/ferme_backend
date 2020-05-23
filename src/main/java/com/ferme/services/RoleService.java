@@ -18,4 +18,8 @@ public class RoleService {
 		return (List<RoleEntity>) repository.findAll();
 	}
 	
+	public RoleEntity saveUserRole(RoleEntity userRole) {
+		return (RoleEntity) repository.save(userRole);
+	}
+	
 }
