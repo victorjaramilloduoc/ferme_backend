@@ -66,8 +66,8 @@ public class UserService {
 	public Object saveUser(UserEntity user, String message) {
 		Map<String, Object> response = new LinkedHashMap<>();
 		try {
-//			user.setPassword(LoginUtil.encodeBase64(user.getPassword()));
 			UserEntity us = repository.save(user);
+			us.setPassword(LoginUtil.encodeBase64(us.getPassword()));
 			response.put("status", "Ok");
 			response.put(message, us);
 		} catch (Exception e) {
@@ -106,7 +106,6 @@ public class UserService {
 		Map<String, Object> response = new LinkedHashMap<>();
 		UserEntity user = repository.getUserByEmailAndPassword(credentialsMap.get("username"),
 				credentialsMap.get("password"));
-//		LoginUtil.encodeBase64(credentialsMap.get("password"))
 		if(user != null) {
 			credentialsMap.clear();
 			credentialsMap.put("id", user.getId().toString());
