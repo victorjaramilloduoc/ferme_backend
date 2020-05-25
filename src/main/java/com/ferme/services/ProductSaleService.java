@@ -30,29 +30,36 @@ public class ProductSaleService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Object saveSale(ProductSaleEntity sale, String message) {
+	public Object saveSale(ProductSaleEntity productSale, String message) {
 		Map<String, Object> response = new LinkedHashMap<>();
+		int i = 0;
 		try {
-			ProductEntity searchProduct = productService.searchProduct(sale.getProduct().getId());
-			if(searchProduct.getStock() >= sale.getQuantity() ? true : false) {
-				
-				searchProduct.setStock(searchProduct.getStock() - sale.getQuantity());
-				Object resp = productService.saveProduct(searchProduct, "prd");
-				
-				ProductEntity prod = (ProductEntity) ((Map<String, Object>) resp).get("prd");
-				if( prod.getStock().equals(0l) ) {
-					productService.disableProduct(prod.getId());
+				for (ProductEntity data : productSale.getProducts()) {
+					
+					ProductEntity searchProduct = productService.searchProduct(data.getId());
+					if (searchProduct.getStock() >= productSale.getQuantity() ? true : false) {
+						
+						searchProduct.setStock(searchProduct.getStock() - productSale.getQuantity());
+						Object resp = productService.saveProduct(searchProduct, "prd");
+						
+						ProductEntity prod = (ProductEntity) ((Map<String, Object>) resp).get("prd");
+						i++;
+						if (prod.getStock().equals(0l)) {
+							productService.disableProduct(prod.getId());
+						}
+					if (((Map<String, Object>) resp).get("status").toString().equals("OK")
+							&& i == productSale.getProducts().size()) {
+							ProductSaleEntity saleResponse = repository.save(productSale);
+							response.put("status", "OK");
+							response.put(message, saleResponse);
+						}
+					} else {
+						response.put("status", "error");
+						response.put("message", "error, el stock es insuficiente");
+					}
 				}
 				
-				if( ((Map<String, Object>)resp).get("status").toString().equals("OK") ) {
-					ProductSaleEntity saleResponse = repository.save(sale);
-					response.put("status", "OK");
-					response.put(message, saleResponse);
-				}
-			}else {
-				response.put("status", "error");
-				response.put("message", "error, el stock es insuficiente");
-			}
+
 		} catch (Exception e) {
 			response.put("status", e.getCause());
 			response.put("cause", e.getMessage());
