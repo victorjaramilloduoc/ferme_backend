@@ -43,7 +43,7 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> saveProduct(@RequestBody ProductEntity product) {
 		
-		Object productSaved = service.saveProduct(product, "save_product");
+		Object productSaved = service.saveProduct(product, "product_saved");
 		
 		if( !((Map<String, Object>)productSaved).get("status").equals("error") ) {
 			return ResponseUtil.reponseUtil(productSaved, HttpStatus.OK);

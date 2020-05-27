@@ -14,8 +14,16 @@ public class UserRoleService {
 	@Autowired
 	private UserRoleRepository repository;
 	
+	public List<UserRoleEntity> getUserRoles(){
+		return (List<UserRoleEntity>) repository.findAll();
+	}
+	
 	public List<UserRoleEntity> getUserRolesByUserId(Long userId){
 		return (List<UserRoleEntity>) repository.getUserRolesByUserId(userId);
+	}
+	
+	public UserRoleEntity saveUserRole(UserRoleEntity userRole) {
+		return (UserRoleEntity) repository.save(userRole);
 	}
 
 }
