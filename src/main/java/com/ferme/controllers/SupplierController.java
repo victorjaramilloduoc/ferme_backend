@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ferme.services.SupplierService;
@@ -83,6 +84,16 @@ public class SupplierController {
 				mapResponse.put("error", response.get("error"));
 				return ResponseUtil.reponseUtil(mapResponse, HttpStatus.CONFLICT);
 			}
+		} else {
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@RequestMapping(value = "/by-product",method = RequestMethod.GET)
+	public ResponseEntity<Object> getSuppliersByProductName(@RequestParam(value = "product_name") String productName){
+		Object response = service.getSuppliersByProduct(productName);
+		if (response != null) {
+			return ResponseUtil.reponseUtil(response, HttpStatus.OK);
 		} else {
 			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
 		}
