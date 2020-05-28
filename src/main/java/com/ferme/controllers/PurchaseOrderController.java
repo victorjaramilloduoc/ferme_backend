@@ -23,5 +23,10 @@ public class PurchaseOrderController {
 	public ResponseEntity<Object> getPurchaseOrders() {
 		return ResponseUtil.reponseUtil(purchaseOrderService.getPurchaseOrders(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Object> savePurchaseOrder() {
+		return ResponseUtil.reponseUtil(purchaseOrderService.getPurchaseOrders(), HttpStatus.OK);
+	}
 
 }

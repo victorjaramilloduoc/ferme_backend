@@ -5,16 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ferme.repositories.PurchaseOrderRepository;
 import com.ferme.repositories.StatusPurchaseOrderRepository;
-import com.portafolio.util.entities.PurchaseOrderEntity;
 import com.portafolio.util.entities.StatusPurchaseOrderEntity;
 
 @Service
 public class PurchaseOrderService {
 	
-	@Autowired
-	private PurchaseOrderRepository orderRepository;
 	
 	@Autowired
 	private StatusPurchaseOrderRepository statusOrderRepository;
@@ -23,8 +19,8 @@ public class PurchaseOrderService {
 		return (List<StatusPurchaseOrderEntity>) statusOrderRepository.findAll();
 	}
 	
-	public PurchaseOrderEntity savePurchaseOrder(PurchaseOrderEntity userRole) {
-		return (PurchaseOrderEntity) orderRepository.save(userRole);
+	public StatusPurchaseOrderEntity savePurchaseOrder(StatusPurchaseOrderEntity userRole) {
+		return (StatusPurchaseOrderEntity) statusOrderRepository.save(userRole);
 	}
 	
 }
