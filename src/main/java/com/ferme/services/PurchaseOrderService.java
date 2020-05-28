@@ -22,5 +22,4 @@ public class PurchaseOrderService {
 	public StatusPurchaseOrderEntity savePurchaseOrder(StatusPurchaseOrderEntity userRole) {
 		return (StatusPurchaseOrderEntity) statusOrderRepository.save(userRole);
 	}
-	
 }
