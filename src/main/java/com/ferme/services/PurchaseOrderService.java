@@ -16,10 +16,10 @@ public class PurchaseOrderService {
 	@Autowired
 	private PurchaseOrderRepository orderRepository;
 	
+	@Autowired
 	private StatusPurchaseOrderRepository statusOrderRepository;
 	
 	public List<StatusPurchaseOrderEntity> getPurchaseOrders(){
-		System.out.println(statusOrderRepository.findAll());
 		return (List<StatusPurchaseOrderEntity>) statusOrderRepository.findAll();
 	}
 	
