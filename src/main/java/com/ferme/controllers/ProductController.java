@@ -39,6 +39,11 @@ public class ProductController {
 		return ResponseUtil.reponseUtil(service.getProducts(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/diferents", method = RequestMethod.GET)
+	public ResponseEntity<Object> getDiferentProducts() {
+		return ResponseUtil.reponseUtil(service.getDiferentsProducts(), HttpStatus.OK);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> saveProduct(@RequestBody ProductEntity product) {

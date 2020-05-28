@@ -51,6 +51,22 @@ public class ProductService {
 		return response;
 	}
 	
+	public List<Map<String, Object>> getDiferentsProducts(){
+		List<Map<String, Object>> respMap = new ArrayList<>();
+		try {
+			getProducts().forEach(data -> {
+				Map<String, Object> response = new LinkedHashMap<>();
+				response.put("id", data.getId());
+				response.put("response_name", data.getName());
+				respMap.add(response);
+			});
+			
+		} catch (Exception e) {
+			LOG.info("Error al cargar la información. causa: {}",e.getMessage());
+		}
+		return respMap;
+	} 
+	
 	public Object saveProduct(ProductEntity product, String message) {
 		Map<String, Object> response = new LinkedHashMap<>();
 		try {
