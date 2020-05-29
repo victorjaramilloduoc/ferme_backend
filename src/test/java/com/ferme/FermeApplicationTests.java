@@ -1,9 +1,12 @@
 package com.ferme;
 
-//@SpringBootTest
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
 class FermeApplicationTests {
 
-//	@Test
+	@Test
 	void contextLoads() {
 	}
 
