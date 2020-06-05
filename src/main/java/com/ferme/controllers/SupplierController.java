@@ -91,7 +91,17 @@ public class SupplierController {
 	
 	@RequestMapping(value = "/by-product",method = RequestMethod.GET)
 	public ResponseEntity<Object> getSuppliersByProductName(@RequestParam(value = "product_name") String productName){
-		Object response = service.getSuppliersByProduct(productName);
+		Object response = service.getSuppliersByProductName(productName);
+		if (response != null) {
+			return ResponseUtil.reponseUtil(response, HttpStatus.OK);
+		} else {
+			return ResponseUtil.reponseUtil(response, HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@RequestMapping(value = "/by-product",method = RequestMethod.GET)
+	public ResponseEntity<Object> getSuppliersByProductId(@RequestParam(value = "product_id") Long productId){
+		Object response = service.getSuppliersByProducId(productId);
 		if (response != null) {
 			return ResponseUtil.reponseUtil(response, HttpStatus.OK);
 		} else {

@@ -16,5 +16,12 @@ public interface SupplierRepository extends CrudRepository<SupplierEntity, Long>
 			+ "JOIN ProductEntity p ON s.id = p.supplier.id "
 			+ "WHERE UPPER(p.name) LIKE %:productName% ")
 	List<SupplierEntity> getSuppliersByProductName(@Param("productName")String productName);
+	
+	@Query("SELECT s "
+			+ "FROM "
+			+ "SupplierEntity s "
+			+ "JOIN ProductEntity p ON s.id = p.supplier.id "
+			+ "WHERE p.id = :productId ")
+	List<SupplierEntity> getSuppliersByProductId(@Param("productId")Long productId);
 
 }

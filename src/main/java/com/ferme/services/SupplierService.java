@@ -78,8 +78,13 @@ public class SupplierService {
 		return responseMap;
 	}
 	
-	public List<SupplierEntity> getSuppliersByProduct(String productName) {
+	public List<SupplierEntity> getSuppliersByProductName(String productName) {
 		List<SupplierEntity> responseList = repository.getSuppliersByProductName(productName.toUpperCase()); 
+		return responseList;
+	}
+	
+	public List<SupplierEntity> getSuppliersByProducId(Long productId) {
+		List<SupplierEntity> responseList = repository.getSuppliersByProductId(productId); 
 		return responseList;
 	}
 }
