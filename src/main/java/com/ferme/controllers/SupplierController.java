@@ -99,7 +99,7 @@ public class SupplierController {
 		}
 	}
 	
-	@RequestMapping(value = "/by-product",method = RequestMethod.GET)
+	@RequestMapping(value = "/by-product-id",method = RequestMethod.GET)
 	public ResponseEntity<Object> getSuppliersByProductId(@RequestParam(value = "product_id") Long productId){
 		Object response = service.getSuppliersByProducId(productId);
 		if (response != null) {
