@@ -45,6 +45,8 @@ public class UserService {
 			 * de la tabla a la cual estamos haciendo referencia en la Clase ** UserEntity **.
 			 */
 			response = (List<UserEntity>) repository.findAll();
+			response.forEach(x -> x.setPassword(LoginUtil.encodeBase64(x.getPassword())));
+			
 		} catch (Exception e) {
 			LOG.error("Error al buscar los usuarios", e.getMessage(), e);
 		}
@@ -65,6 +67,7 @@ public class UserService {
 		Map<String, Object> response = new LinkedHashMap<>();
 		try {
 			UserEntity us = repository.save(user);
+			us.setPassword(LoginUtil.encodeBase64(us.getPassword()));
 			response.put("status", "Ok");
 			response.put(message, us);
 		} catch (Exception e) {
@@ -84,6 +87,7 @@ public class UserService {
 			if(us != null) {
 				us.setEnable(false);
 				us = repository.save(us);
+				us.setPassword(LoginUtil.encodeBase64(us.getPassword()));
 				responseMap.put("user", us);
 			}else {
 				responseMap.put("error", "el usuario no existe");
